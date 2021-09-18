@@ -2,8 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
-#If you want the testcases to go slower/faster, please change this number (# of seconds between steps. Suggested: 3)
-speed=1
+#If you want the testcases to go slower/faster, please change this number (# of seconds between steps. Suggested: 2 for fast, 5 for slow)
+speed=2
 
 
 driver = webdriver.Chrome('chromedriver')
