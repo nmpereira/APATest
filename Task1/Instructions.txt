@@ -1,0 +1,8 @@
+1. Clone original google sheets spreadsheet sheet
+2. Create worksheet and name it as Email
+3. Create another worksheet and name it Summary
+4. Copy contents from the xlsx sheet in the above 2 worksheets and paste them in the correct google spreadsheet. Make sure you copy the Gsheet forumlas
+5. Copy code from GappsScript into script editor
+6. Run AutoRun()
+
+Alternatively, please use this link https://docs.google.com/spreadsheets/d/1Bn80Sc16e2CNIU6WXj8LErJv5LFTY20Bt6scbl_UUcY/edit?usp=sharing (has public editor access)

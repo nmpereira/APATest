@@ -1,0 +1,63 @@
+//Run autoRun() for automated email reports every 24 hours. This will create a schedule trigger (can be deleted under triggers tab) and will send emails until cancelled
+//Run sendEmails() if you want to run the email manually without adding a trigger
+
+function autoRun(){
+/** 
+Run sendEmail() periodically
+
+Trigger every 24 hours.
+TODO: Option to change this to a specific time of day using .athour(x)
+*/
+
+ScriptApp.newTrigger('sendEmails')
+    .timeBased()
+    .everyDays(1)
+    //.everyMinutes(1)
+    //.atHour(10)
+    .create();
+
+}
+
+
+
+/**
+ * Sends emails with data from the current spreadsheet.
+ */
+function sendEmails() {
+  var email_sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Email");
+  var startRow = 2; // First row of data to process
+  var numRows = 1; // Number of rows to process (TODO: Update this to be dynamic for multiple emails and not just a constant var)
+  // Fetch the range of cells A2:B2
+  var email_Range = email_sheet.getRange(startRow, 1, numRows, 2);
+  // Fetch values for each row in the Range.
+  var email = email_Range.getValues();
+
+  //for loop to iterate multiple email addresses
+  for (var i in email) {
+    var row = email[i];
+    var emailAddress = row[0]; // First column
+    //var message = row[1]; // Second column
+    var message = dataSelection()
+    var subject = 'Here are your results!';
+    MailApp.sendEmail(emailAddress, subject, message);
+
+
+
+  }
+}
+
+function dataSelection(){
+  var startRow = 1; // First row of data to process
+  var numRows = 14; // Number of rows to process
+
+  var data_sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Summary");
+  var data_range = data_sheet.getRange(startRow, 1, numRows, 2);
+  var data = data_range.getValues();
+  var dataPayload = ""
+  for (var i in data) {
+    var row = data[i];
+    dataPayload = dataPayload + data[i]+"\n"
+  }
+
+  return dataPayload
+}
